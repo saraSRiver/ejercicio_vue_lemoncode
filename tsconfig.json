@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "plugins": [{ "name": "ts-vue-plugin" }],
+    "resolveJsonModule": true,
+    "target": "ES2017",
+    "module": "ESNext",
     "strict": true,
     "jsx": "preserve",
     "moduleResolution": "node",
