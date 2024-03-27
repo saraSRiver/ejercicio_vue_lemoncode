@@ -1,25 +1,31 @@
-    <template>
-        <input class="busqueda" type="text">
+   <template>
+         <input v-model="corps" class="busqueda" type="text">
   </template>
   
   <script lang="ts">
-    import { defineComponent, PropType } from "vue";
-    //import { corporationService } from '../services/corporationService';
+    import { defineComponent, PropType, ref  } from "vue";
     import { Member } from '../types/Member';
     import { Corporation } from '../types/Corporation';
     import ButtonCorp from './ButtonCorp.vue';
-  
+    import { memberService } from '../services/memberService';
+
 
     export default defineComponent({
-      data(){
-        return{
-          corps: [] as Corporation[]
+      setup() {
+        const corps = ref("lemoncode");
+
+        const buscarMiembros = async () => {
+          try {
+            const members = await memberService.get(corps.value);
+            // Aquí puedes hacer algo con los miembros, como emitir un evento con los datos
+          } catch (error) {
+            console.error('Error al buscar miembros:', error);
+          }
         };
-      }, 
-      async created() {
-        //this.corps= await fetch(`https://api.github.com/orgs/${corps}/members`).then((c) => c.json);
+
+        return { corps, buscarMiembros };
       },
-    });
+    })
   </script>
   
 <style scoped>

@@ -1,8 +1,11 @@
 import {Member} from '../types/Member';
+import SearchCorp from "./SearchCorp.vue";
+import { Corporation } from '../types/Corporation';
+import { ref } from 'vue';
 
 export const memberService = {
-    async get() {
-      const members = await fetch('https://api.github.com/orgs/lemoncode/members').then((m) => m.json);
-      return members as Member[];
-    },
-  };
+  async get(corps: string) {
+    const members = await fetch(`https://api.github.com/orgs/${corps}/members`).then(response => response.json());
+    return members as unknown as Member[];
+  },
+};
